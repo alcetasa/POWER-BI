@@ -1,0 +1,99 @@
+Plazo = CALCULATE([Duracion],REMOVEFILTERS())
+
+
+
+NroDiasTrabajados = 
+    VAR dias= DISTINCTCOUNT(Tb_hechos[Fecha de la  Aplicación de la Encuesta])
+    VAR texto= "días"
+RETURN 
+    dias  & texto
+
+Diastrabajados = CALCULATE([NroDiasTrabajados],REMOVEFILTERS())	
+
+NroEncuestas = COUNTROWS(Tb_hechos)
+NroEncuestasSNR = CALCULATE([NroEncuestas],Tb_hechos[Encuestadora]="SNR")  
+
+###.
+PONER MAS INFORMACION EN UN GRAFICO 
+Lienzo en la pagina 2  --- panel de vizualizaciones ---formato de pagina --Informacpon de la pagina ---Permitir uso como infomacio de herramientas
+Objeto visual---panel de vizualizaciones -- general-Informacpon de herramientas --Opciones--Elegir Pagina(pagina 2)-- 
+
+CAMBIAR DIMENSIONES DEL LIENZO 
+
+Panel de vizualizaciones-
+formato de pagina
+configuracion de lienzo
+
+### 
+
+NroEncIMM = COALESCE(CALCULATE([NroEncuestas],Tb_hechos[Encuestadora]="IMM"),0)
+
+CONEXION GOOGLE SHEETS
+
+INICIO 
+COMPARTIR
+PUBLICAR EN LA WEB
+
+###########
+NO RECONOCE FECHA TEXTO
+DIVIDIR COLUMNAS
+0,4,6(por posiciones)
+
+COLUMNA PERSONALIZADA
+UNIR COLUMNAS
+Text.From([FECHA_CORTE.3])&"/"&Text.From([FECHA_CORTE.2])&"/"&Text.From([FECHA_CORTE.1])
+
+
+Text.From([FECHA_RESULTADO.3])&"/"&Text.From([FECHA_RESULTADO.2])&"/"& Text.From([FECHA_RESULTADO.1])
+
+
+#######
+ACTIVAR MAPA
+
+OPCIONES Y CONFIGURACIONES
+CARACTERISTI CAS DE VERSION PRELIMINAR
+
+casillas 
+OBJETO VISUAL --MAPA DE FORMAS
+HERRAMIENTAS DE COLUNMNAS
+CATEGORIAS DE DATOS  PAIS O REGION
+### 
+DESCARGAR MAPAS 
+https://github.com/juaneladio/peru-geojson
+Para convertir geojson a topjson
+https://mapshaper.org/
+
+EXPORT 
+topoJSON
+
+##################
+
+CREAR MEDIDAS
+Especificar medidas 
+NroCasos = COUNTROWS(positivos_covid) 
+
+###
+DISCRETIZACION DE UNA VARIABLE NUMERICA
+
+PANEL DE VIZUALIZACION
+objeto visual
+eye y o x  ( nuevo grupo ) ---
+
+tamaño de discretización
+eye x o x ( tipo -> categorico)
+
+titulo de x quitar
+
+etiquetas  de datos 
+valores
+
+mostrar unidades 
+ninguno
+
+
+### 
+MEJORAR EL TITULO 
+GENERAL 
+### #
+NomDepartamento = COALESCE(SELECTEDVALUE(positivos_covid[DEPARTAMENTO]),"") ### Titulo  cambiante	
+TotalCasos=CALCULATE([NroCasos],REMOVEFILTERS()) ## valores totatel que sin filtors

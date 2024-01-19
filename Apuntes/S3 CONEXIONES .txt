@@ -1,0 +1,81 @@
+Transformar 
+Rellanr asi arriba y hacia abajo 
+Delimitar columna 
+dliminatador personalizado (comienza con la tabla no con los encabezados)
+
+Consolidado de archivos txt (abrir carpetas)
+ve a fx para cambiar los indices que se van agrupar
+
+filtrar archivos segun su extension en powe bi
+
+CONECTAR SQL SERVER  
+importar base de datos sql server
+
+SERVIDOR
+SELECT @@SERVERNAME
+aceptar
+Usar credenciales actuales o alternativas
+
+##############################
+
+Restaurar BASE DE DATOS EN SQL SERVER 
+CLICK DERECHO em databases 
+Restore Database
+.device  
+poner los ...
+add
+pegar la direccion 
+elegir el bak
+aceptar todo
+################
+MACROS
+
+### 
+convertir varias hojas a tablas y poner columnas 
+
+'Macros para convertir convertir varias hojas a tablas
+ Sub ConvertirRangoATabla()
+    For i = 1 To Sheets.Count
+        Sheets(i).Select
+        ActiveSheet.ListObjects.Add(xlSrcRange, Range("a1").CurrentRegion, , xlYes).Name = ActiveSheet.Name
+    Next
+End Sub
+
+################### 
+UNION DE HOJAS en una sola en Power Query
+
+Nueva consulta
+Combinar consultas
+Iniciar editor del Power Query 
+
+o 
+De otras fuentes 
+Consulta en blanco 
+
+
+Power pibot reconocer todas las tablas contenidas en el libro 
+=Excel.CurrentWorkbook() 
+
+En Content que es una columna desactivar  "Usar el nombre de columnas original como prefijo
+
+## Transformar los datos 
+## asignar el tipo de variable
+# quitar columnas 
+## filtrar Nas etc etc 
+
+
+quitar filas duplicadas
+
+
+let
+    Origen = Excel.CurrentWorkbook(),
+    #"Se expandió Content" = Table.ExpandTableColumn(Origen, "Content", {"SERVICIO", "HORA INICIO", "DESCRIPCIÓN", "PRIORIDAD", "ESPECIALIDAD", "OBSERVACIONES", "ENCUESTADORA", "FECHA:"}, {"SERVICIO", "HORA INICIO", "DESCRIPCIÓN", "PRIORIDAD", "ESPECIALIDAD", "OBSERVACIONES", "ENCUESTADORA", "FECHA:"}),
+    #"Columnas quitadas" = Table.RemoveColumns(#"Se expandió Content",{"Name"}),
+    #"Rellenar hacia abajo" = Table.FillDown(#"Columnas quitadas",{"ENCUESTADORA", "FECHA:"}),
+    #"Filas filtradas" = Table.SelectRows(#"Rellenar hacia abajo", each ([HORA INICIO] <> null)),
+    #"Duplicados quitados" = Table.Distinct(#"Filas filtradas"),
+    #"Índice agregado" = Table.AddIndexColumn(#"Duplicados quitados", "Índice", 1, 1, Int64.Type),
+    #"Columnas reordenadas" = Table.ReorderColumns(#"Índice agregado",{"Índice", "SERVICIO", "HORA INICIO", "DESCRIPCIÓN", "PRIORIDAD", "ESPECIALIDAD", "OBSERVACIONES", "ENCUESTADORA", "FECHA:"}),
+    #"Tipo cambiado" = Table.TransformColumnTypes(#"Columnas reordenadas",{{"FECHA:", type date}, {"HORA INICIO", type time}})
+in
+    #"Tipo cambiado"

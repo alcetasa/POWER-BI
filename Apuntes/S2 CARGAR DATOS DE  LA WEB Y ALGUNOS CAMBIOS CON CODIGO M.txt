@@ -1,0 +1,45 @@
+let
+    Origen = Web.BrowserContents("https://countrymeters.info/es"),
+    #"Tabla extraída a partir de HTML" = Html.Table(Origen, {{"Column1", "DIV.review:nth-child(5) > TABLE.facts > * > TR > :nth-child(1)"}, {"Column2", "DIV.review:nth-child(5) > TABLE.facts > * > TR > :nth-child(2)"}, {"Column3", "DIV.review:nth-child(5) > TABLE.facts > * > TR > :nth-child(3)"}, {"Column4", "DIV.review:nth-child(5) > TABLE.facts > * > TR > :nth-child(4)"}, {"Column5", "DIV.review:nth-child(5) > TABLE.facts > * > TR > :nth-child(5)"}}, [RowSelector="DIV.review:nth-child(5) > TABLE.facts > * > TR"]),
+    #"Tipo cambiado" = Table.TransformColumnTypes(#"Tabla extraída a partir de HTML",{{"Column1", Int64.Type}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}, {"Column5", Percentage.Type}}),
+    #"Columnas quitadas" = Table.RemoveColumns(#"Tipo cambiado",{"Column2", "Column3"}),
+    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Columnas quitadas",{{"Column1", "N°"}, {"Column4", "Población"}, {"Column5", "Porcentaje"}})
+in
+    #"Columnas con nombre cambiado"
+
+
+
+#####
+
+ let
+    Origen = Web.BrowserContents("https://countrymeters.info/es"),
+    #"Tabla extraída a partir de HTML" = Html.Table(Origen,{{"N°", "DIV.review:nth-child(5) > TABLE.facts > * > TR > :nth-child(1)"},{"Column2", "DIV.review:nth-child(5) > TABLE.facts > * > TR > :nth-child(2)"}, {"Column3", "DIV.review:nth-child(5) > TABLE.facts > * > TR > :nth-child(3)"},{"Poblacion", "DIV.review:nth-child(5) > TABLE.facts > * > TR > :nth-child(4)"}, {"Porcentaje", "DIV.review:nth-child(5) > TABLE.facts > * > TR > :nth-child(5)"}}, [RowSelector="DIV.review:nth-child(5) > TABLE.facts > * > TR"]),
+    #"Tipo cambiado" = Table.TransformColumnTypes(#"Tabla extraída a partir de HTML",{{"N°", Int64.Type}, {"Column2", type text}, {"Column3", type text}, {"Poblacion", type text}, {"Porcentaje", Percentage.Type}}),
+    #"Columnas quitadas" = Table.RemoveColumns(#"Tipo cambiado",{"Column2", "Column3"})
+in
+    #"Columnas quitadas"
+
+
+###
+SE CAMBIO EL TITULO DE LAS COL 1,4,5 SE ELIMINARON LA COLUMNAS 2 Y 3 
+
+
+= Table.ReplaceValue(#"Columnas quitadas"," ","",Replacer.ReplaceText,{"Poblacion"})
+
+
+# SE BORRO LOS ESPACIOS VACIOS 
+
+
+#### 
+DEPURANDO ALGUNOS CODGIOS
+
+let
+    Origen = Web.BrowserContents("https://countrymeters.info/es"),
+    #"Tabla extraída a partir de HTML" = Html.Table(Origen,{{"N°", "DIV.review:nth-child(5) > TABLE.facts > * > TR > :nth-child(1)"},{"Column2", "DIV.review:nth-child(5) > TABLE.facts > * > TR > :nth-child(2)"}, {"Column3", "DIV.review:nth-child(5) > TABLE.facts > * > TR > :nth-child(3)"},{"Poblacion", "DIV.review:nth-child(5) > TABLE.facts > * > TR > :nth-child(4)"}, {"Porcentaje", "DIV.review:nth-child(5) > TABLE.facts > * > TR > :nth-child(5)"}}, [RowSelector="DIV.review:nth-child(5) > TABLE.facts > * > TR"]),
+   // #"Tipo cambiado" = Table.TransformColumnTypes(#"Tabla extraída a partir de HTML",{{"N°", Int64.Type}, {"Column2", type text}, {"Column3", type text}, {"Poblacion", type text}, {"Porcentaje", Percentage.Type}}),
+    #"Columnas quitadas" = Table.RemoveColumns(#"Tabla extraída a partir de HTML",{"Column2", "Column3"}),
+    #"Valor reemplazado" = Table.ReplaceValue(#"Columnas quitadas"," ","",Replacer.ReplaceText,{"Poblacion"}),
+    #"Tipo cambiado1" = Table.TransformColumnTypes(#"Valor reemplazado",{{"Poblacion", Int64.Type}, {"Porcentaje", Percentage.Type}})
+in
+    #"Tipo cambiado1"
+

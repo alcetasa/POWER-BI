@@ -1,0 +1,25 @@
+CREACION TABLA MEDIDAS
+INICIO 
+ESPECIFICAR MEDIDAS
+
+CAMBIAR DE NOMBRE A LA HOJA 
+CUADRO DE TEXTO
+
+
+CREAR MONTOS TOTALES 
+Monto = SUMX(OrdersDetails,OrdersDetails[Quantity]*OrdersDetails[UnitPrice]) .... 
+SumaPesos = SUM(Orders4[Freight])
+SumCantProductos = SUM(OrdersDetails[Quantity] )
+
+###Publicar 
+
+INICIO
+
+Publicar 
+fue tienes que tener premiuM Y.Y
+
+
+## Seleccionar algunas columnas 
+DerivadaOrders = SelectColumns(Orders4,"OrderID",Orders4[OrderID],
+                                       "OrderDate",Orders4[OrderDate],
+                                       "RequiredDate",Orders4[RequiredDate])

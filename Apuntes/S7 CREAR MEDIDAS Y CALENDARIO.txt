@@ -1,0 +1,147 @@
+LOGICA 
+
+
+coalesce = 
+    VAR A = BLANK()
+    VAR B = "PRUEBA"
+RETURN
+    COALESCE(A,B)
+
+
+coalesce = 
+    VAR A = BLANK()
+    VAR B = BLANK()
+    VAR C = "HOLA"
+RETURN
+    COALESCE(A,B,C)
+
+Medida = TODAY()
+
+
+Es como un SI 
+
+Swicht = SWITCH(MONTH(TODAY()),
+         1,"Enero",
+         2,"Febrero",
+         3,"Marzo",
+         4,"Abril",
+         5,"Mayo",
+         6,"Junio",
+         7,"Julio",
+         8,"Agosto",
+         9,"Setiembre")
+
+
+# MES DE HOY -2 
+
+Edate = EDATE(TODAY(),-2)
+
+
+Swicht = SWITCH(MONTH(EDATE(TODAY(),-2)),
+         1,"Enero",
+         2,"Febrero",
+         3,"Marzo",
+         4,"Abril",
+         5,"Mayo",
+         6,"Junio",
+         7,"Julio",
+         8,"Agosto",
+         9,"Setiembre").
+
+
+Swicht = 
+    VAR n=5
+RETURN
+    SWITCH(MONTH(EDATE(TODAY(),-n)),
+         1,"Enero",
+         2,"Febrero",
+         3,"Marzo",
+         4,"Abril",
+         5,"Mayo",
+         6,"Junio",
+         7,"Julio",
+         8,"Agosto",
+         9,"Setiembre")
+
+
+## LOGICA OPERADOR OR || 
+
+OR = 
+    VAR A=TRUE()
+    VAR B=FALSE()
+RETURN
+    OR(A,B)
+
+
+OR = 
+    VAR A=TRUE()
+    VAR B=FALSE()
+RETURN
+    A||B
+
+
+## LOGICA OPERADOR AND  &&
+
+
+AND = 
+    VAR A=TRUE()
+    VAR B=FALSE()
+RETURN
+    AND(A,B)
+
+
+AND = 
+    VAR A=TRUE()
+    VAR B=FALSE()
+RETURN
+    A&&B
+
+
+############ 
+
+TENER EN CUENTA DE LAS POSICION DE LAS HOJAS AL COMBINAR EN TRANSFORMACION DE DATOS
+CAMBIAR EN FX (TRANSFORMAR ARCHIVO )
+
+= (Parámetro1) => let
+        Origen = Excel.Workbook(Parámetro1, null, true),
+        #"1_Sheet" = Origen{0}[Data], .......................................................................................
+        #"Encabezados promovidos" = Table.PromoteHeaders(#"1_Sheet", [PromoteAllScalars=true])
+    in
+        #"Encabezados promovidos"
+
+
+Cant_Ordenes = COUNTROWS(Orders)
+
+Clientes = COUNTROWS(DISTINCT(Orders[CustomerID]))
+
+Clientes = 
+     DISTINCTCOUNT(Orders[CustomerID])
+     --COUNTROWS(DISTINCT(Orders[CustomerID]))
+
+
+
+
+############
+CALENDARIO FINAL 
+
+Calendario = 
+    VAR fechaInicial=MIN(Orders[OrderDate])
+    VAR fechaFinal = MAX(Orders[OrderDate])
+RETURN
+        ADDCOLUMNS(CALENDAR(fechaInicial,fechaFinal),
+        "Year",YEAR([Date]),
+        "Month",MONTH([Date]),
+        "NombreMes", FORMAT ([Date], "mmmm"),
+        "Día",DAY([Date]),
+        "NumSemana", "S"&WEEKNUM([Date]),
+        "NomDía", FORMAT([Date], "dddd"),
+        "Periodo", format([Date], "mmn")&FORMAT([Date], "-yy"))
+
+
+##
+Quitar interaccion entre objetos visuales
+
+dar click en objeto
+FORMATO
+
+Editar interacciones

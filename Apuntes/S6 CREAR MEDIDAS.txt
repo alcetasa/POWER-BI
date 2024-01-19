@@ -1,0 +1,105 @@
+Nueva medida
+prueba = REPT(UNICHAR(9733),5)
+
+Nueva columna
+Tabla 3 = UNION(Tabla,'Tabla 2')
+
+Es como el Head	
+TopN = TOPN(2,Tabla,Tabla[Value1],DESC)
+
+
+GenerarSeries= GENERATESERIES(1.2,2.4,0.4)
+
+
+
+espacio hacia abajo alt espacio y sangria tab
+
+Calendario = 
+VAR fechainicio=DATE(2023,1,1)
+VAR fechafinal=DATE(2023,12,31)
+RETURN
+    CALENDAR(fechainicio,fechafinal)
+
+
+Calendario = 
+VAR fechainicio=DATE(2023,1,1)
+VAR fechafinal=DATE(2023,12,31)
+RETURN
+  ADDCOLUMNS(CALENDAR(fechainicio,fechafinal),
+    "Año",year([Date]))
+
+
+Calendario = 
+VAR fechainicio=DATE(2023,1,1)
+VAR fechafinal=DATE(2023,12,31)
+RETURN
+  ADDCOLUMNS(CALENDAR(fechainicio,fechafinal),
+    "Año",year([Date]),
+    "Mes",MONTH([Date]),
+    "Dia",DAY([Date]))
+
+
+
+Calendario = 
+VAR fechainicio=DATE(2023,1,1)
+VAR fechafinal=DATE(2023,12,31)
+RETURN
+  ADDCOLUMNS(CALENDAR(fechainicio,fechafinal),
+    "Año",year([Date]),
+    "Mes",MONTH([Date]),
+    "NombreMes",FORMAT([Date],"mmmm"))
+
+
+Calendario = 
+VAR fechainicio=DATE(2023,1,1)
+VAR fechafinal=DATE(2023,12,31)
+RETURN
+  ADDCOLUMNS(CALENDAR(fechainicio,fechafinal),
+    "Año",year([Date]),
+    "Mes",MONTH([Date]),
+    "NombreMes",FORMAT([Date],"mmmm"),
+    "Dia",DAY([Date]))
+
+
+
+Calendario = 
+VAR fechainicio=DATE(2023,1,1)
+VAR fechafinal=DATE(2023,12,31)
+RETURN
+  ADDCOLUMNS(CALENDAR(fechainicio,fechafinal),
+    "Año",year([Date]),
+    "Mes",MONTH([Date]),
+    "NombreMes",FORMAT([Date],"mmmm"),
+    "NumeroSemanas","S"&WEEKNUM([Date]),
+    "Dia",DAY([Date]) 
+     )
+
+
+
+Calendario = 
+VAR fechainicio=DATE(2023,1,1)
+VAR fechafinal=DATE(2023,12,31)
+RETURN
+  ADDCOLUMNS(CALENDAR(fechainicio,fechafinal),
+    "Año",year([Date]),
+    "Mes",MONTH([Date]),
+    "NombreMes",FORMAT([Date],"mmmm"),
+    "NumeroSemanas","S"&WEEKNUM([Date]),
+    "Nomdia",FORMAT([Date],"dddd"),
+    "Periodo",FORMAT([Date],"mm")&FORMAT([Date],"-yyyy")
+    )
+
+
+Calendario = 
+VAR fechainicio=MIN(Orders4[OrderDate])
+VAR fechafin=MAX(Orders4[OrderDate])
+RETURN
+  ADDCOLUMNS(CALENDAR(fechainicio,fechafin),
+    "Año",year([Date]),
+    "Mes",MONTH([Date]),
+    "NombreMes",FORMAT([Date],"mmmm"),
+    "NumeroSemanas","S"&WEEKNUM([Date]),
+    "Nomdia",FORMAT([Date],"dddd"),
+    "Periodo",FORMAT([Date],"mm")&FORMAT([Date],"-yyyy"),
+    "Dia",DAY([Date])
+    )

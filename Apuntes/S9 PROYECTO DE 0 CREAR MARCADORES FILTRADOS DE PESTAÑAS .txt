@@ -1,0 +1,86 @@
+C
+Iconos
+https://fontawesome.com/search?m=free
+donwload svg file
+Insertar 
+
+Elementos - botones-formato
+estilo -texto
+icono-personalizado
+crear marcadores --filtrar vistas 
+asignarla a iconos 
+
+
+######################
+ABRIR EXCEL  : TABLAS DE DIMENSIONES SOLO HAY ID´S 
+ABRIR CARPETAS  :  TABLA DE HECHOS 
+COMBINAR Y TRANSFORMAR LA TABLA DE HECHOS 
+RENOMBRAR TABLAS 
+ELEGIR COLUMNAS 
+CERRAR Y GUARDAR 
+HACER LAS RELACIONES  TABLAS DE DIMENSIONES  CON  TABLA DE HECHOS (MODELOS ESTRELLA)
+
+
+CREAR CALENDARIO
+Calendario = 
+    VAR fechaInicial=MIN(Tb_hechos[Fecha de la  Aplicación de la Encuesta])
+    VAR fechaFinal = MAX(Tb_hechos[Fecha de la  Aplicación de la Encuesta])
+RETURN
+        ADDCOLUMNS(CALENDAR(fechaInicial,fechaFinal),
+        "Year",YEAR([Date]),
+        "Month",MONTH([Date]),
+        "NombreMes", FORMAT ([Date], "mmmm"),
+        "Día",DAY([Date]),
+        "NumSemana", "S"&WEEKNUM([Date]),
+        "NomDía", FORMAT([Date], "dddd"),
+        "Periodo", format([Date], "mmn")&FORMAT([Date], "-yy"))
+
+RELACIONAR EL CALENDARIO CON EN EL MODELO 
+
+INICIO  CUADRO DE TEXTO 
+
+CREAR TABLA MEDIDAS 
+Inicico Especificar datos
+Nueva mediadas 
+NroEncuestas= COUNTROWS(Tb_hechos)
+NrodeEncuestadoras = DISTINCTCOUNT(Tb_hechos[Encuestadora])
+FechadeReporte = TODAY()
+NrodeEspecialidades = DISTINCTCOUNT(Tb_hechos[Especialidad donde fue atendido])
+
+Duracion = 
+    VAR fmin=MIN(Tb_hechos[Fecha de la  Aplicación de la Encuesta])
+    VAR fmax=MAX(Tb_hechos[Fecha de la  Aplicación de la Encuesta])
+RETURN
+    DATEDIFF(fmin,fmax,DAY)& "dias"
+
+
+NroDiasTrabajados = 
+    VAR dias= DISTINCTCOUNT(Tb_hechos[Fecha de la  Aplicación de la Encuesta])
+    VAR texto= "días"
+RETURN 
+    dias  & texto
+
+
+##########
+poner colores en las tarjetas segun el numero 
+FORMATO - GENERAL -FONDO  fx 
+
+#poner texto al boton
+INSERTAR-BOTON -ESTILO TEXTO
+
+# AGRUPAR 
+graficos 
+PANEL SELECCION 
+
+#Crar marcadores 
+ocultar
+agregar
+
+
+AGREGAR EL MARCADOR AL ICONO
+BOTON 
+ACCION 
+tipo MARCADOR
+
+PARA VER LOS GRAFICO 
+PRESIONAR CTRL +CLICK

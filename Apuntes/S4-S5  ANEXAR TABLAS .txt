@@ -1,0 +1,57 @@
+UNIR VARIAS TABLAS DINAMIMICAS DE EXCEL
+
+Dinamizar tablas 
+Pasar de valores a titulo de la columna 
+click en la columna de los valores 
+transformar 
+columnas dinamica
+cuadro de dialogo
+use los nombres de la columnas de los valores para crear nuevas columnas 
+poner la columnas que se va anidar 
+
+
+let
+    Origen = Excel.CurrentWorkbook(){[Name="Table2"]}[Content],
+    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"Representante", type text}, {"Día", type text}, {"Horas voluntariado", type number}}),
+    #"Columna dinamizada" = Table.Pivot(#"Tipo cambiado", List.Distinct(#"Tipo cambiado"[Día]), "Día", "Horas voluntariado", List.Sum)
+in
+    #"Columna dinamizada"
+
+
+Dinamizar tablas 
+#### 
+
+que los valores de una columnas sean las columnas de otros valores
+cuadro de dialogo
+
+use los nombres de la columnas de los valores para crear nuevas columnas 
+
+seleccionar la columnas de valores
+ 
+Opciones avanzadas 
+No agregar
+
+
+
+
+#### 
+Anular dinamización de columnaas
+
+llevar una tabla a power query cieras y cargar como  
+
+completar hacia abajo
+dinamizar
+
+Columna personalizada
+
+formula de columna personalizada
+="Nombres de los valores"
+aceptar
+transformar
+anexar consultas 
+anexar consultas para crear una nueva 
+poner la tabla  principal  si se desea
+
+Se crea una nueva 
+quitar habilitar carga quitando el check 
+para que este solo la tabla anexada
