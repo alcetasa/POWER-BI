@@ -1,5 +1,5 @@
 Transformar 
-Rellanr asi arriba y hacia abajo 
+Rellanr hacia arriba y hacia abajo 
 Delimitar columna 
 dliminatador personalizado (comienza con la tabla no con los encabezados)
 
